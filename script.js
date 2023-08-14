@@ -5,13 +5,14 @@ function updateWindData() {
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
-      const windSpeed = data.wind.speed;
+      const windSpeedMps = data.wind.speed;
+      const windSpeedKph = (windSpeedMps * 3.6).toFixed(2); // Convert m/s to km/h
       const windDirection = data.wind.deg;
 
       const windSpeedElement = document.getElementById('wind-speed');
       const windDirectionElement = document.getElementById('wind-direction');
 
-      windSpeedElement.innerText = `Wind Speed: ${windSpeed} km/h`;
+      windSpeedElement.innerText = `Wind Speed: ${windSpeedKph} km/h`;
       windDirectionElement.innerText = `Wind Direction: ${windDirection}°`;
     })
     .catch(error => {
