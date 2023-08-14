@@ -24,6 +24,15 @@ function updateWindData(url, elementIdPrefix) {
 
         windSpeedElement.innerText = `Wind Speed: ${windSpeedKph} km/h`;
         windDirectionElement.innerText = `Wind Direction: ${windDirection}°`;
+
+        // Apply color based on wind speed
+        if (windSpeedKph < 15) {
+          windSpeedElement.style.color = 'green';
+        } else if (windSpeedKph >= 15 && windSpeedKph <= 25) {
+          windSpeedElement.style.color = 'orange';
+        } else {
+          windSpeedElement.style.color = 'red';
+        }
       } else {
         console.error('Wind data for tomorrow at midday not found.');
       }
@@ -33,9 +42,11 @@ function updateWindData(url, elementIdPrefix) {
     });
 }
 
-updateWindData(currentApiUrl, 'current'); // Current data
-updateWindData(forecastApiUrl, 'tomorrow-midday'); // Tomorrow's forecast at midday
-setInterval(() => {
-  updateWindData(currentApiUrl, 'current');
-  updateWindData(forecastApiUrl, 'tomorrow-midday');
-}, 5 * 60 * 1000); // Refresh every 5 minutes
+document.getElementById('refresh-button').addEventListener('click', () => {
+  updateWindData(currentApiUrl, 'current'); // Current data
+  updateWindData(forecastApiUrl, 'tomorrow-midday'); // Tomorrow's forecast at midday
+});
+
+// Initial data load when the page is loaded
+updateWindData(currentApiUrl, 'current');
+updateWindData(forecastApiUrl, 'tomorrow-midday');
