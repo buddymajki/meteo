@@ -12,7 +12,7 @@ function updateWindData() {
       const windSpeedElement = document.getElementById('wind-speed');
       const windDirectionElement = document.getElementById('wind-direction');
 
-      windSpeedElement.innerText = `Wind Speed: ${windSpeedKph} km/h`;
+      windSpeedElement.innerText = `Wind Speed: ${windSpeedKph} km/h fasza`;
       windDirectionElement.innerText = `Wind Direction: ${windDirection}°`;
     })
     .catch(error => {
